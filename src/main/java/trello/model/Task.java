@@ -1,9 +1,6 @@
 package trello.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -14,12 +11,16 @@ import java.util.List;
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long taskId;
-    private String state;
-    private String assignedTo;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "state", columnDefinition = "ENUM('TODO', 'DOING', 'DONE')")
+    private State state;
+
     private String description;
     private Timestamp taskCreated;
     private Timestamp taskCompleted;
+    private String assignedTo;
 
 }

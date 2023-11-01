@@ -11,40 +11,35 @@ import trello.service.TaskService;
 import java.util.List;
 
 @RestController
-@RequestMapping("trelloApplicatipn")
+@RequestMapping("trelloApplication/tasks")
 public class TaskController {
 
     @Autowired
     TaskService taskService;
 
     @PostMapping("/createTask")
-    Long createTask(Task task){
+    Long createTask(@RequestBody Task task){
         return taskService.createTask(task);
     }
 
     @GetMapping("/task/{taskId}")
-    Task getTaskById(@PathVariable Long taskId){
+    public ResponseEntity<Task> getTaskById(@PathVariable Long taskId){
         return taskService.getByTaskId(taskId);
     }
 
     @GetMapping("alltasks")
-    List<Task> showBoard(){
-        System.out.println("in this method");
+    public ResponseEntity<List<Task>> showBoard(){
         return taskService.showBoard();
     }
 
     @PostMapping("modifyTask")
     Task modifyTask(Task task){
+
         return taskService.modifyTask(task);
     }
 
-    @DeleteMapping("deleteTask")
-    ResponseEntity<String> deleteTask(@PathVariable Long taskId){
-        return new ResponseEntity<>("Task Deleted", HttpStatus.OK);
-    }
-
-    @GetMapping("display")
-    String display(Long taskId){
-        return "this is the display";
+    @DeleteMapping("deleteTask/{taskId}")
+    public Boolean deleteTask(@PathVariable Long taskId){
+        return taskService.deleteTaskById(taskId);
     }
 }
