@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import trello.model.User;
 import trello.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("trelloApplication/users")
+@RequestMapping("TrelloApplication/users")
 public class UserController {
 
     @Autowired
@@ -28,16 +29,32 @@ public class UserController {
 
     @GetMapping("getAll")
     public ResponseEntity<List<User>> getAllUsers(){
-        return userService.getAllUsers();
+        try{
+            return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
     //delete user
-    @DeleteMapping("delete")
-    public void deleteUser(Long userId){
-        userService.deleteUser(userId);
+    @DeleteMapping("delete/{userId}")
+    public ResponseEntity<Boolean> deleteUser( @PathVariable Long userId){
+        try{
+            return new ResponseEntity<>(userService.deleteUser(userId), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("user/{userId}")
-    public User getUserById( @PathVariable Long userId){
-        return userService.getUserById(userId);
+    public ResponseEntity<User> getUserById( @PathVariable Long userId){
+
+        try{
+            return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 }

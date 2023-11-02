@@ -29,10 +29,7 @@ public class TaskServiceImplementation implements TaskService{
 
     @Override
     public Task modifyTask(Task task) {
-        System.out.println(task.getDescription());
-        System.out.println(task.getTaskId());
         Long fetchedTaskId = task.getTaskId();
-        System.out.println("********"+fetchedTaskId);
         Task fetchedTask = taskDao.findByTaskId(fetchedTaskId);
         if(task.getDescription()!=null)
             fetchedTask.setDescription(task.getDescription());

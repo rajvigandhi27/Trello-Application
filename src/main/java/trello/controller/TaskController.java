@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("trelloApplication/tasks")
+@RequestMapping("TrelloApplication/tasks")
 public class TaskController {
 
     @Autowired

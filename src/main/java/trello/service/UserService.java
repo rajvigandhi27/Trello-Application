@@ -10,9 +10,9 @@ import java.util.List;
 public interface UserService {
     Long addUser(User user);
 
-    ResponseEntity<List<User>> getAllUsers();
+    List<User> getAllUsers();
 
-    void deleteUser(Long userId);
+    Boolean deleteUser(Long userId);
 
     User getUserById(Long userId);
 }

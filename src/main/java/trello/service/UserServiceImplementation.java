@@ -22,18 +22,16 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
-    public ResponseEntity<List<User>> getAllUsers() {
-        try{
-            return new ResponseEntity<>(userDao.findAll(), HttpStatus.OK);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+    public List<User> getAllUsers() {return userDao.findAll();
     }
 
     @Override
-    public void deleteUser(Long userId) {
-        userDao.deleteById(userId);
+    public Boolean deleteUser(Long userId) {
+        if(userDao.findByUserId(userId)!=null){
+            userDao.deleteById(userId);
+            return true;
+        }
+        return false;
     }
 
     @Override

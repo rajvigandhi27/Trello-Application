@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import trello.model.Comment;
 import trello.service.CommentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,6 @@ public class CommentController {
     @PostMapping("/add/{taskId}/{userId}")
     public ResponseEntity<Long> addComment(@PathVariable Long taskId, @PathVariable Long userId, @RequestBody Comment commentObj){
             try{
-                System.out.println("here, in the controller");
                 return new ResponseEntity<>(commentService.addComment(taskId, userId, commentObj), HttpStatus.OK);
             }catch (Exception e){
                 e.printStackTrace();
@@ -28,12 +28,23 @@ public class CommentController {
         }
 
     @GetMapping("get/user/{userId}")
-    public List<Comment> getCommentByUserId(@PathVariable Long userId){
-        return commentService.getCommentByUserId(userId);
+    public ResponseEntity<List<Comment>> getCommentByUserId(@PathVariable Long userId){
+        try{
+            return new ResponseEntity<>(commentService.getCommentByUserId(userId), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
+
     @GetMapping("get/task/{taskId}")
-    public List<Comment> getCommentByTaskId(@PathVariable Long taskId){
-        return commentService.getCommentByTaskId(taskId);
+    public ResponseEntity<List<Comment>> getCommentByTaskId(@PathVariable Long taskId){
+        try{
+            return new ResponseEntity<>(commentService.getCommentByTaskId(taskId), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 }
