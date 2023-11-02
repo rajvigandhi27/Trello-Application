@@ -8,8 +8,8 @@ import java.util.List;
 public interface TaskService {
     Long createTask(Task task);
     Task modifyTask(Task task);
-    ResponseEntity<Task> getByTaskId(Long TaskId);
+    Task getByTaskId(Long TaskId);
     List<Task> getHistory(Long taskId);
-    ResponseEntity<List<Task>> showBoard();
+    List<Task> showBoard();
     Boolean deleteTaskById(Long taskId);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface UserService {
-    ResponseEntity<Long> addUser(User user);
+    Long addUser(User user);
 
     ResponseEntity<List<User>> getAllUsers();
 

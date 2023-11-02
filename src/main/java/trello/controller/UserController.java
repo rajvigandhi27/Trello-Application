@@ -1,6 +1,7 @@
 package trello.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trello.model.User;
@@ -12,12 +13,17 @@ import java.util.List;
 @RequestMapping("trelloApplication/users")
 public class UserController {
 
+    @Autowired
     UserService userService;
     //add user
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity<Long> addUser(@RequestBody User user){
-
-        return userService.addUser(user);
+        try{
+            return new ResponseEntity<>(userService.addUser(user), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(-1L, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("getAll")

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import trello.model.Task;
 import trello.service.TaskService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,28 +19,52 @@ public class TaskController {
     TaskService taskService;
 
     @PostMapping("/createTask")
-    Long createTask(@RequestBody Task task){
-        return taskService.createTask(task);
+    public ResponseEntity<Long> createTask(@RequestBody Task task){
+        try{
+            return new ResponseEntity<>(taskService.createTask(task), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(-1L, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/task/{taskId}")
     public ResponseEntity<Task> getTaskById(@PathVariable Long taskId){
-        return taskService.getByTaskId(taskId);
+        try{
+            return new ResponseEntity<>(taskService.getByTaskId(taskId), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("alltasks")
     public ResponseEntity<List<Task>> showBoard(){
-        return taskService.showBoard();
+        try{
+            return new ResponseEntity<>(taskService.showBoard(), HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("modifyTask")
-    Task modifyTask(Task task){
-
-        return taskService.modifyTask(task);
+    @PutMapping("modifyTask")
+    public ResponseEntity<Task> modifyTask(@RequestBody Task task){
+            try{
+                return new ResponseEntity<>(taskService.modifyTask(task), HttpStatus.OK);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("deleteTask/{taskId}")
-    public Boolean deleteTask(@PathVariable Long taskId){
-        return taskService.deleteTaskById(taskId);
+    public ResponseEntity<Boolean> deleteTask(@PathVariable Long taskId){
+        try{
+            return new ResponseEntity<>(taskService.deleteTaskById(taskId), HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 }

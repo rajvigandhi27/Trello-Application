@@ -29,35 +29,29 @@ public class TaskServiceImplementation implements TaskService{
 
     @Override
     public Task modifyTask(Task task) {
-        Task fetchedTask = taskDao.findByTaskId(task.getTaskId());
+        System.out.println(task.getDescription());
+        System.out.println(task.getTaskId());
+        Long fetchedTaskId = task.getTaskId();
+        System.out.println("********"+fetchedTaskId);
+        Task fetchedTask = taskDao.findByTaskId(fetchedTaskId);
         if(task.getDescription()!=null)
             fetchedTask.setDescription(task.getDescription());
         if(task.getAssignedTo()!=null)
             fetchedTask.setAssignedTo(task.getAssignedTo());
-        if(task.getState()!=null)
-        {
-            String userProvidedState = task.getAssignedTo();
-            try {
-                State newState = State.valueOf(userProvidedState);
-                // Set the new state in the task
-            } catch (IllegalArgumentException e) {
-                // Handle invalid state value here
-            }
+        State fetchedSate = task.getState();
+        if(fetchedSate!=null) {
+            if (fetchedSate != State.TODO && fetchedSate != State.DOING && fetchedSate != State.DONE)
+                throw new IllegalArgumentException("State value is incorrect");
+            fetchedTask.setState(fetchedSate);
         }
-            fetchedTask.setState(task.getState());
         if(fetchedTask.getState()==State.DONE)
             fetchedTask.setTaskCompleted(new Timestamp(System.currentTimeMillis()));
         return fetchedTask;
     }
 
     @Override
-    public ResponseEntity<Task> getByTaskId(Long taskId) {
-        try{
-            return new ResponseEntity<>(taskDao.findByTaskId(taskId), HttpStatus.OK);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    public Task getByTaskId(Long taskId) {
+            return taskDao.findByTaskId(taskId);
     }
 
     @Override
@@ -66,13 +60,8 @@ public class TaskServiceImplementation implements TaskService{
     }
 
     @Override
-    public ResponseEntity<List<Task>> showBoard() {
-        try{
-            return new ResponseEntity<>(taskDao.findAll(), HttpStatus.OK);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+    public List<Task> showBoard() {
+        return taskDao.findAll();
     }
 
     @Override

@@ -16,9 +16,9 @@ public class UserServiceImplementation implements UserService{
     @Autowired
     UserDao userDao;
     @Override
-    public ResponseEntity<Long> addUser(User user) {
+    public Long addUser(User user) {
         userDao.save(user);
-        return new ResponseEntity<>(user.getUserId(), HttpStatus.OK);
+        return user.getUserId();
     }
 
     @Override
