@@ -43,6 +43,7 @@ public class TaskServiceImplementation implements TaskService{
         }
         if(fetchedTask.getState()==State.DONE)
             fetchedTask.setTaskCompleted(new Timestamp(System.currentTimeMillis()));
+        taskDao.save(fetchedTask);
         return fetchedTask;
     }
 
