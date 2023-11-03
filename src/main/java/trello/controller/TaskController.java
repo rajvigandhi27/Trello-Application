@@ -67,4 +67,24 @@ public class TaskController {
         }
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
+
+    @GetMapping("/calculate/completionTime")
+    public ResponseEntity<Double> calculateCompletionTime(){
+        try{
+            return new ResponseEntity<>(taskService.calculateCompletionTime(), HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(0.0, HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/calculate/timeToStartDoing/{taskId}")
+    public ResponseEntity<Double> calculateTimeToStartDoing(@PathVariable Long taskId){
+        try{
+            return new ResponseEntity<>(taskService.calculateTimeToStartDoing(taskId), HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(0.0, HttpStatus.BAD_REQUEST);
+    }
 }

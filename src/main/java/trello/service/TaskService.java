@@ -13,4 +13,6 @@ public interface TaskService {
     List<Task> showBoard();
     Boolean deleteTaskById(Long taskId);
     List<Task> getTaskByUsername(String username);
+    Double calculateCompletionTime();
+    Double calculateTimeToStartDoing(Long taskId);
 }

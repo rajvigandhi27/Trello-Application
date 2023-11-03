@@ -48,4 +48,5 @@ public class UserServiceImplementation implements UserService{
     public User getUserById(Long userId) {
         return userDao.findByUserId(userId);
     }
+
 }

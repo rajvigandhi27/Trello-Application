@@ -37,7 +37,6 @@ public class CommentController {
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
 
-
     @GetMapping("get/task/{taskId}")
     public ResponseEntity<List<Comment>> getCommentByTaskId(@PathVariable Long taskId){
         try{
