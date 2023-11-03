@@ -56,11 +56,6 @@ public class TaskServiceImplementation implements TaskService {
     }
 
     @Override
-    public List<Task> getHistory(Long taskId) {
-        return null;
-    }
-
-    @Override
     public List<Task> showBoard() {
         return taskDao.findAll();
     }

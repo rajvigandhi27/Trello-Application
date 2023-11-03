@@ -9,7 +9,6 @@ public interface TaskService {
     Long createTask(Task task);
     Task modifyTask(Task task);
     Task getByTaskId(Long TaskId);
-    List<Task> getHistory(Long taskId);
     List<Task> showBoard();
     Boolean deleteTaskById(Long taskId);
     List<Task> getTaskByUsername(String username);
