@@ -23,6 +23,7 @@ public class TaskServiceImplementation implements TaskService {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         task.setTaskCreated(timestamp);
         task.setState(State.TODO);
+        task.setAssignedTo(null);
         taskDao.save(task);
         return task.getTaskId();
     }

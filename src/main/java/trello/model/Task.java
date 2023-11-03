@@ -18,7 +18,6 @@ public class Task {
     @Column(name = "state", columnDefinition = "ENUM('TODO', 'DOING', 'DONE')")
     private State state;
 
-    int estimatedHours;
     private String description;
     private Timestamp taskCreated;
     private Timestamp taskStarted;
