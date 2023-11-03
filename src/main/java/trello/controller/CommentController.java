@@ -17,7 +17,7 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
-    @PostMapping("/add/{taskId}/{userId}")
+    @PostMapping("/addComment/{taskId}/{userId}")
     public ResponseEntity<Long> addComment(@PathVariable Long taskId, @PathVariable Long userId, @RequestBody Comment commentObj){
             try{
                 return new ResponseEntity<>(commentService.addComment(taskId, userId, commentObj), HttpStatus.OK);
