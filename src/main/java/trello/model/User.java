@@ -10,17 +10,9 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
     private String username;
     private String email;
 
-    //@OneToMany
-    //private List<Task> task;
-    //userName
-    //email
-    //userRole: creator/admin
-    //one task: multiple comments taskId as a foreign key : text, taskId, userId.
-    //many users to many comments : userId as a foreign key
-    //if either state is changed or description is changed.
 }

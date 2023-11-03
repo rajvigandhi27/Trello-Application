@@ -70,4 +70,7 @@ public class TaskServiceImplementation implements TaskService{
         }
         return false;
     }
+    public List<Task> getTaskByUsername(String username) {
+        return taskDao.findByAssignedTo(username);
+    }
 }

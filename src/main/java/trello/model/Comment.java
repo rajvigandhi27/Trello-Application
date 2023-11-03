@@ -11,7 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commentId;
     private String commentText;
 
@@ -21,8 +21,9 @@ public class Comment {
     @JsonIgnore
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "taskId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Task task;
 }
