@@ -16,7 +16,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    //add user
+
+    // Endpoint for adding a new user to the application.
     @PostMapping("/add")
     public ResponseEntity<Long> addUser(@RequestBody User user){
         try{
@@ -27,6 +28,7 @@ public class UserController {
         return new ResponseEntity<>(-1L, HttpStatus.BAD_REQUEST);
     }
 
+    // Endpoint for retrieving all users from the application.
     @GetMapping("getAll")
     public ResponseEntity<List<User>> getAllUsers(){
         try{
@@ -36,7 +38,8 @@ public class UserController {
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
-    //delete user
+
+    // Endpoint for deleting a user by their ID.
     @DeleteMapping("delete/{userId}")
     public ResponseEntity<Boolean> deleteUser( @PathVariable Long userId){
         try{
@@ -47,6 +50,7 @@ public class UserController {
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
+    // Endpoint for retrieving a user by their ID.
     @GetMapping("user/{userId}")
     public ResponseEntity<User> getUserById( @PathVariable Long userId){
 

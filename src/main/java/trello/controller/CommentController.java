@@ -17,6 +17,7 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    // Handles the POST request to add a comment to a task by a specific user.
     @PostMapping("/addComment/{taskId}/{userId}")
     public ResponseEntity<Long> addComment(@PathVariable Long taskId, @PathVariable Long userId, @RequestBody Comment commentObj){
             try{
@@ -26,7 +27,7 @@ public class CommentController {
             }
             return new ResponseEntity<>(-1L, HttpStatus.BAD_REQUEST);
         }
-
+    // Retrieves comments made by a specific user.
     @GetMapping("get/user/{userId}")
     public ResponseEntity<List<Comment>> getCommentByUserId(@PathVariable Long userId){
         try{
@@ -36,7 +37,7 @@ public class CommentController {
         }
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
-
+    // Retrieves comments associated with a specific task.
     @GetMapping("get/task/{taskId}")
     public ResponseEntity<List<Comment>> getCommentByTaskId(@PathVariable Long taskId){
         try{
