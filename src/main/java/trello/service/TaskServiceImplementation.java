@@ -12,6 +12,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class implements the TaskService interface,
+ * providing concrete operations to manage tasks in the Trello application.
+ */
 @Service
 public class TaskServiceImplementation implements TaskService {
 

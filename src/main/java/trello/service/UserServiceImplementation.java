@@ -12,6 +12,10 @@ import trello.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Service implementation for managing user-related operations.
+ */
 @Service
 public class UserServiceImplementation implements UserService{
 

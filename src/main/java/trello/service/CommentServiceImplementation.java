@@ -11,6 +11,11 @@ import trello.model.User;
 
 import java.util.List;
 
+
+/**
+ * This class provides the implementation for the CommentService interface.
+ * It contains methods to add a comment to a task and retrieve comments by user ID or task ID.
+ */
 @Service
 public class CommentServiceImplementation implements CommentService{
 
